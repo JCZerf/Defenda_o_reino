@@ -1,6 +1,6 @@
 // Variáveis iniciais
 let vidaJogador = 50;
-let vidaInimigo = 50;
+let vidaInimigo = 100;
 
 function exibirHistoria(mensagem) {
     document.getElementById("historia").textContent = mensagem;
