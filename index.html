@@ -1,19 +1,188 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Defenda o reino</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>Jogo de RPG: Defenda o Reino!</h1>
-  <div id="historia"></div>
-  <div id="opcoes"></div>
-  <div id="status">
-    <p><strong>Vida do Jogador:</strong> <span id="vidaJogador">50</span></p>
-    <p><strong>Vida do Inimigo:</strong> <span id="vidaInimigo">100</span></p>
-  </div>
-  <script src="app.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Lenda do Reino Perdido - RPG Estratégico</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Favicon usando emoji -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚔️</text></svg>"
+    />
+    <meta
+      name="description"
+      content="Um RPG estratégico épico com história envolvente e decisões que moldam seu destino!"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>🏰 A Lenda do Reino Perdido ⚔️</h1>
+
+      <div class="game-area">
+        <!-- Área principal do jogo -->
+        <div class="main-game">
+          <div id="historia">✨ Preparando sua aventura épica...</div>
+          <div id="opcoes">
+            <!-- Botões de ação aparecerão aqui -->
+          </div>
+
+          <!-- Status Effects -->
+          <div id="statusEfeitos" class="status-effects">
+            <!-- Efeitos temporários aparecerão aqui -->
+          </div>
+        </div>
+
+        <!-- Painel de estatísticas estratégico -->
+        <div class="stats-panel">
+          <div class="stat-section">
+            <h3>📜 Progresso</h3>
+            <div class="stat-item">
+              <span class="stat-label">📖 Capítulo:</span>
+              <span class="stat-value" id="capitulo">1</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">📍 Fase:</span>
+              <span class="stat-value" id="fase">1</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">👑 Reputação:</span>
+              <span class="stat-value" id="reputacao">Desconhecido</span>
+            </div>
+          </div>
+
+          <div class="stat-section">
+            <h3>⚔️ Herói</h3>
+
+            <!-- Vida -->
+            <div class="resource-container">
+              <div class="resource-label">
+                <span>❤️ Vida:</span>
+                <span
+                  ><span id="vidaJogador">100</span>/<span id="vidaMaxima"
+                    >100</span
+                  ></span
+                >
+              </div>
+              <div class="resource-bar vida-bar">
+                <div class="resource-bar-fill" id="barraVidaJogador"></div>
+              </div>
+            </div>
+
+            <!-- Mana -->
+            <div class="resource-container">
+              <div class="resource-label">
+                <span>🔮 Mana:</span>
+                <span
+                  ><span id="manaJogador">50</span>/<span id="manaMaxima"
+                    >50</span
+                  ></span
+                >
+              </div>
+              <div class="resource-bar mana-bar">
+                <div class="resource-bar-fill" id="barraManaJogador"></div>
+              </div>
+            </div>
+
+            <!-- Stamina -->
+            <div class="resource-container">
+              <div class="resource-label">
+                <span>⚡ Stamina:</span>
+                <span
+                  ><span id="staminaJogador">100</span>/<span id="staminaMaxima"
+                    >100</span
+                  ></span
+                >
+              </div>
+              <div class="resource-bar stamina-bar">
+                <div class="resource-bar-fill" id="barraStaminaJogador"></div>
+              </div>
+            </div>
+
+            <!-- Stats básicos -->
+            <div class="stats-grid">
+              <div class="stat-item">
+                <span class="stat-label">⭐ Nível:</span>
+                <span class="stat-value" id="nivel">1</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">✨ XP:</span>
+                <span class="stat-value" id="experiencia">0</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">💰 Moedas:</span>
+                <span class="stat-value" id="moedas">50</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">😊 Moral:</span>
+                <span class="stat-value" id="moral">50</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-section">
+            <h3>🎒 Inventário</h3>
+            <div class="inventory-grid">
+              <div class="inventory-item">
+                <span class="item-icon">🧪</span>
+                <span class="item-name">Poções Cura</span>
+                <span class="item-count" id="pocoes">2</span>
+              </div>
+              <div class="inventory-item">
+                <span class="item-icon">💙</span>
+                <span class="item-name">Poções Mana</span>
+                <span class="item-count" id="pocoesMana">2</span>
+              </div>
+              <div class="inventory-item">
+                <span class="item-icon">📜</span>
+                <span class="item-name">Pergaminhos</span>
+                <span class="item-count" id="pergaminhos">0</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="stat-section combat-section"
+            id="combatSection"
+            style="display: none"
+          >
+            <h3>⚔️ Combate</h3>
+            <div class="stat-item">
+              <span class="stat-label">👹 Inimigo:</span>
+              <span class="stat-value" id="nomeInimigo">-</span>
+            </div>
+            <div class="resource-container">
+              <div class="resource-label">
+                <span>💀 Vida Inimigo:</span>
+                <span id="vidaInimigo">0</span>
+              </div>
+              <div class="resource-bar enemy-bar">
+                <div class="resource-bar-fill" id="barraVidaInimigo"></div>
+              </div>
+            </div>
+
+            <!-- Cooldowns -->
+            <div class="cooldowns" id="cooldownsContainer">
+              <h4>🕒 Habilidades</h4>
+              <div id="cooldownsList">
+                <!-- Cooldowns aparecerão aqui -->
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-section">
+            <h3>🎯 Habilidades</h3>
+            <div class="abilities-list" id="habilidadesList">
+              <div class="ability-item locked">🗡️ Ataque Duplo</div>
+              <div class="ability-item locked">🔍 Analisar Inimigo</div>
+              <div class="ability-item locked">🛡️ Bloqueio Perfeito</div>
+              <div class="ability-item locked">💚 Cura Avançada</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
 </html>
